@@ -1,0 +1,37 @@
+
+.NoteArea {
+    width: 60em; /* Occupy 100% of its container's width */
+    max-width: 100%; /* Ensure it doesn't exceed its container's width */
+    height: 400px; /* Set an initial height (adjust as needed) */
+    resize: none; /* Prevent manual resizing */
+    border-radius: 10px;
+    padding: 20px;
+    background:  linear-gradient(180deg, rgba(32,39,45,1) 0%, rgba(158,158,105,1) 100%);
+    color: white;
+    font-size: 0.9rem;
+    border: none;
+}
+.NoteArea:focus{
+    outline: none;
+    background:  linear-gradient(0deg, rgba(32,39,45,1) 0%, rgba(158,158,105,1) 100%);
+}
+.NoteArea::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(255, 255, 255);
+    opacity: 1; /* Firefox */
+  }
+
+@media (max-width: 1080px) {
+    .NoteArea {
+        margin: auto;
+        width: auto;
+    }
+}
+
+/* Responsive behavior for different screen sizes */
+@media (max-width: 768px) {
+    .NoteArea {
+        height: 200px; /* Adjust the height for smaller screens */
+        max-width:300px; /* Occupy 100% of its container's width on smaller screens */
+  
+    }
+}

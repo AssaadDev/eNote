@@ -1,0 +1,42 @@
+.Btn-body{
+    
+    width: 150px;
+    height: 40px;
+    background-color: rgb(47, 112, 209);
+    border-radius: 20px;
+    padding: 0 0 15px;
+}
+.Btn-cstm{
+    min-width: 120px;
+    height: 40px;
+    margin: 20px;
+    padding: 10px 20px;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    font-size: 1.25rem;
+    font-weight: bold;
+    background-color: #fff;
+}
+.deleteBtn{
+  background-color: rgb(255, 0, 0);
+  color: rgb(0, 0, 0);
+}
+
+.dltHover:hover, .deleteBtn:hover {
+  background-color: #000000 !important;
+  box-shadow: 0px 15px 20px rgba(255, 32, 24, 0.747) !important;
+  color: #ffffff !important;
+  transform: translateY(-2px);
+}
+
+  .Btn-cstm:hover {
+    background-color: #3de52e;
+    box-shadow: 0px 15px 20px rgba(46, 186, 229, 0.651);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+ 

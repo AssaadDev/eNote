@@ -1,0 +1,21 @@
+.bckgrnd {
+    width: 100%; /* Make the div occupy the full width of its container */
+    max-width: 1080px; /* Set the maximum width to 1080 pixels */
+    height: 1080px; /* Set the fixed height to 1580 pixels */
+    background-color: rgb(76, 148, 76);
+    padding: 20px; /* Optional: Add padding for spacing */
+    box-sizing: border-box; /* Include padding and border in the total width */
+    border-radius: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Media query to make the div responsive in smaller screens */
+@media (max-width: 1080px) {
+    .bckgrnd {
+        width: 100%;
+        max-width: 100%; /* Remove the max-width constraint */
+        height: auto; /* Allow the height to adjust proportionally */
+    }
+}

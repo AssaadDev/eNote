@@ -1,0 +1,15 @@
+.centar{
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  @media (max-width: 768px) {
+      /* Styles for screens up to 768px wide */
+    }
+    
+    @media (max-width: 480px) {
+      /* Styles for screens up to 480px wide */
+    }

@@ -1,0 +1,27 @@
+.startTop{
+    justify-content: flex-start
+}
+.BtnArea{
+    height: 100px;
+    flex-direction: row !important;
+    color: black;
+}
+.toolsBar{
+    flex-direction: row;
+}
+.NoteAreaDash{
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    color: black;
+}
+.serchBarTitle{
+    border: none;
+}
+.serchBarTitle:active, .serchBarTitle:focus{
+    outline: none;
+    background-color: #dff5cf;
+}

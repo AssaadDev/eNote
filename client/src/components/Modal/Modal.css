@@ -1,0 +1,45 @@
+.upper-right-modal {
+    color: rgb(0, 0, 0);
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #ebff79;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ebff79;
+    border-radius: 4px;
+    padding: 10px;
+    max-width: 300px;
+    display: none;
+  }
+  
+  .upper-right-modal.show {
+    display: block;
+    animation: slideIn 0.5s forwards;
+  }
+  
+  .upper-right-modal.hide {
+    animation: slideOut 0.5s forwards;
+  }
+  
+  .upper-right-modal-content {
+    text-align: center;
+  }
+  
+  @keyframes slideIn {
+    from {
+      right: -300px;
+    }
+    to {
+      right: 20px;
+    }
+  }
+  
+  @keyframes slideOut {
+    from {
+      right: 20px;
+    }
+    to {
+      right: -350px;
+    }
+  }
+  

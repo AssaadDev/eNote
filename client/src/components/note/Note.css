@@ -1,0 +1,19 @@
+
+.title{
+font-size: 1.8rem;
+margin: 0 0 15px;
+}
+  
+
+.sticky{
+  font-size: 1.5rem;
+  padding: 1em;
+  display: inline-block;
+  height: 10em;
+  width: 10em;
+  font-family: monospace;
+  box-shadow: 0.2em 0.3em 0.5em rgba(0, 0, 0, 0.5);
+  transform: rotate(5deg) translateY(-0.75em);
+  overflow: hidden;/* Hide any text that overflows the container */
+  text-overflow: ellipsis;/* Display an ellipsis (...) for overflowing text */
+}

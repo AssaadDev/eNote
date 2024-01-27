@@ -1,0 +1,40 @@
+  /* Default styles for the label and input */
+  label {
+    display: block;
+    width: auto;
+}
+
+input {
+    width: 300px;
+    height: 30px;
+    padding: 5px 15px;
+    border-radius: 10px;
+}
+
+.noFocus:focus{
+    outline: none;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+    label {
+        width: auto; /* Adjust the label width for smaller screens */
+    }
+}
+
+@media (max-width: 500px) {
+    input {
+        width: 200px; /* Adjust the input width for smaller screens */
+    }
+}
+
+
+.input-Bar{
+
+}
+.lable-Bar{
+
+}
+.comb-Bar{
+
+}
