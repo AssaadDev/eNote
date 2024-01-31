@@ -6,6 +6,12 @@ button{
   font-family: monospace;
 }
 
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -104,4 +110,10 @@ a:hover {
   background-color: #0a912b;
   border-radius: 10px;
   border: 1px solid #ffffff;
+}
+
+@media (max-width: 767px) {
+  body {
+    font-size: 14px; /* Adjust font size for smaller screens */
+  }
 }

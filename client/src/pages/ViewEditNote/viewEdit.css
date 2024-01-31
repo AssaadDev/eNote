@@ -17,6 +17,11 @@
       text-overflow: ellipsis;/* Display an ellipsis (...) for overflowing text */
     
     }
+    .adjustView{
+      overflow: overlay;
+      max-height: 440px;
+      height: auto;
+    }
 
     @media (max-width: 550px){
       .arange {
@@ -33,4 +38,6 @@
       .arange a , .arange button{
         margin: 5px;
       }
+      
+      
     }

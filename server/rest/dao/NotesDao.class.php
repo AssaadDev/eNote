@@ -19,7 +19,7 @@ require_once dirname(__FILE__)."/BaseDao.class.php";
         */
         public function getNotes($id){
           $tableName = 'notes' . $id;
-          $stmt = $this->conn->prepare("SELECT * FROM $tableName WHERE folder is null ORDER BY id desc;");
+          $stmt = $this->conn->prepare("SELECT * FROM $tableName WHERE folder is null or folder = '' ORDER BY id desc;");
           $stmt->execute();
           return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
@@ -93,7 +93,7 @@ require_once dirname(__FILE__)."/BaseDao.class.php";
           $stmt = $this->conn->prepare($sql);
           $stmt->execute();
 
-          return $stmt->fetchAll(PDO::FETCH_ASSOC); ;
+          return $stmt->fetchAll(PDO::FETCH_ASSOC); 
         }
 
 
@@ -106,6 +106,16 @@ require_once dirname(__FILE__)."/BaseDao.class.php";
               }else{
                   return false;
               }
+        }
+
+
+        public function moveToFolder($data){
+          $tableName = 'notes' . $data['userId'];
+          
+          $stmt = $this->conn->prepare("UPDATE ".$tableName." SET folder = '".$data['folderId']."' WHERE id = '".$data['noteIdNumb']."'");
+          $stmt->execute();
+
+          return $stmt->fetchAll(PDO::FETCH_ASSOC); 
         }
 
 

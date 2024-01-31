@@ -92,7 +92,7 @@ function ChangePW({showModal}) {
       
             <InputBar label='Old Password' type='password' disabled={inputStatus} placeholder='Old password' name="password" onChange={handleInputChange} />
             <InputBar label='New Password' type='password' disabled={inputStatus} placeholder='New password' name="newPassword" onChange={handleInputChange} />
-            <InputBar label='Conf Password' type='password' disabled={inputStatus} placeholder='Confirm new password' name="ConfNewPassword" onChange={(e)=> setConfPass(e.target.value)} />
+            <InputBar label='Confirm Password' type='password' disabled={inputStatus} placeholder='Confirm new password' name="ConfNewPassword" onChange={(e)=> setConfPass(e.target.value)} />
             
             <div className='centar BtnArea'>
 

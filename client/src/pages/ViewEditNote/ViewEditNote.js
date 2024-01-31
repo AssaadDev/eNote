@@ -66,19 +66,16 @@ function ViewEditNote({ showModal }) {
 
   function remindMail(){
 
-    if(!selectedDay){
-      showModal('Please select day!');
-      return;
-    }
+   
     const newObject = {
       ...noteData,
-      selectedDay: selectedDay,
       userID: userID
     };
-    axios.post('/rest/setReminder', newObject) 
+
+    axios.post('/rest/sendEmail', newObject) 
       .then((response) => {
 
-        showModal('You will be reminded in '+selectedDay+' days.');
+        showModal('Your note has been sent!');
 
         console.log(response.data);
         remindBtn();
@@ -134,7 +131,7 @@ function ViewEditNote({ showModal }) {
           {view && noteData ? (
             <div className='centar inputArea'>
               <h1 className='title'>{noteData.title}</h1>
-              <p>{noteData.notes}</p>
+              <p className='adjustView'>{noteData.notes}</p>
             </div>
           ) : (
             <div className='centar inputArea'>
@@ -159,8 +156,8 @@ function ViewEditNote({ showModal }) {
                 dltStatus ? 
                 (
                   <div>
-                    <p>are you sure want to delete this note?</p>
-                      <div className='centar BtnArea'>
+                    <p style={{ background: 'white', padding: '1px 5px', borderRadius: '15px', color: 'red' }}>Are you sure want to delete this note?</p>
+                      <div className='centar BtnArea' >
                         <Btn text='yes' styleBtn={"dltHover"} onClick={deleteYes} />
                         <Btn text='no' onClick={deletebtn} />
                       </div>
@@ -168,25 +165,11 @@ function ViewEditNote({ showModal }) {
                   ):
                   rmnStatus ? (
                   <div>
-                    <label htmlFor="daysDropdown">In how many days should I remind you?</label>
-                      <select
-                        id="daysDropdown"
-                        name="daysDropdown"
-                        value={selectedDay}
-                        onChange={handleDayChange}
-                      >
-                          <option value="" disabled>Select</option>
-                          <option value="1">1 Day</option>
-                          <option value="2">2 Day</option>
-                          <option value="3">3 Day</option>
-                          <option value="4">4 Day</option>
-                          <option value="5">5 Day</option>
-                          <option value="6">6 Day</option>
-                          <option value="7">7 Day</option>
-                      </select>
+                  <label style={{ background: 'white', padding: '1px 5px', borderRadius: '15px' }}>Send this note to your email?</label>
+
               
                       <div className='centar BtnArea'>
-                        <Btn text='Set' onClick={remindMail} />
+                        <Btn text='Send' onClick={remindMail} />
                         <Btn text='Back' onClick={remindBtn} />
                       </div>
                     </div>
@@ -196,7 +179,7 @@ function ViewEditNote({ showModal }) {
                     <div className='centar BtnArea arange'>
                           <Link to='/dashboard'>Back</Link>
                           <Btn text='edit' onClick={changeView} />
-                          <Btn text='Reminde' onClick={remindBtn} />
+                          <Btn text='Email' onClick={remindBtn} />
                           <Btn text='delete' styleBtn={"deleteBtn"} onClick={deletebtn} />
                     </div>
                   )

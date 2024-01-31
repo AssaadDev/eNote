@@ -43,6 +43,9 @@ function DashBoard({showModal}) {
 
   const [ask, setAsk]  = useState(false);
 
+  const [refresh, setRefresh] = useState(false);
+
+
   
   useEffect(()=>{
     if(!token && !userID){
@@ -53,6 +56,8 @@ function DashBoard({showModal}) {
       navigate('/verify');
       return;
     }
+
+    localStorage.setItem('folder', null);
     
     axios.get(bckRoot, { params: { id: userID } }) // your-backend-api-endpoint
     .then((response) => {
@@ -79,7 +84,7 @@ function DashBoard({showModal}) {
     });
 
     console.log(folders);
-  },[bckRoot]);
+  },[bckRoot, refresh]);
 
 function dltFolder(){
   ask ? setAsk(false) : setAsk(true);
@@ -152,13 +157,92 @@ function dltPerm(){
     axios.post('rest/createFolder', creatingFolder) // your-backend-api-endpoint
     .then((response) => {
       showModal('Folder created!');
-      window.location.reload();
+      setNewFold(false);
+      setFolderName('');
+      refresh == true ? setRefresh(false) : setRefresh(true);
+      
+      //window.location.reload();
     })
     .catch((error) => {
       showModal(error.response.data.message);
     });
 
   }
+
+
+  const [draggedItem, setDraggedItem] = useState(null);
+
+    const [dnd, setDnd] = useState({
+      userId: '',
+      folderId: '',
+      noteIdNumb: '',
+    });
+
+  const handleDragStart = (e, item) => {
+    console.log("start dragged!");
+    setDraggedItem(item);
+  };
+
+  const handleDragEnd = () => {
+    console.log("end dragged!");
+    setDraggedItem(null);
+  };
+
+  const handleDrop = (e, folderId) => {
+    e.preventDefault();
+    handleDragLeave();
+
+    if(draggedItem !== null){
+
+      const newDnd = {
+        userId: userID,
+        folderId: folderId,
+        noteIdNumb: draggedItem
+      };
+
+    axios.post('rest/moveToFolder', newDnd) // your-backend-api-endpoint
+    .then((response) => {
+      showModal('Note is moved!');
+      setRefresh(prevRefresh => !prevRefresh);
+      //refresh == true ? setRefresh(false) : setRefresh(true);
+      //setBckRoot('rest/notes');
+    })
+    .catch((error) => {
+      showModal(error.response.data.message);
+    });
+
+    }
+
+    
+    // Handle the drop logic here
+    //console.log('Dropped item:', draggedItem);
+    
+    setDraggedItem(null);
+  };
+
+  const handleDragOver = (e, folderName) => {
+    e.preventDefault();
+    // Update the style during the hover state
+    if (!isHovered) {
+      setIsHovered(true);
+      setHoveredFolder(folderName);
+    }
+  };
+  
+
+  const handleDragLeave = () => {
+    // Reset the style when the item leaves the drop zone
+    setIsHovered(false);
+    setHoveredFolder(null);
+  };
+  
+
+
+  const [isHovered, setIsHovered] = useState(false);
+  const [dropZoneStyle, setDropZoneStyle] = useState({});
+  const [hoveredFolder, setHoveredFolder] = useState(null);
+
+
 
   return (
     loading ? ( 
@@ -223,7 +307,19 @@ function dltPerm(){
           (<Btn text='Back' onClick={() => {
             setBckRoot('rest/notes');
             localStorage.setItem('folder', null);
-          }} />)
+          }}
+          
+          onDrop={(e) => handleDrop(e, null)}
+          onDragOver={(e) => handleDragOver(e, 'back')}
+          onDragLeave={() => handleDragLeave('back')}
+          style={{
+            ...dropZoneStyle,
+            border: hoveredFolder === 'back' ? '1px solid red' : null,
+            backgroundColor: hoveredFolder === 'back' ? 'black' : null,
+            color: hoveredFolder === 'back' ? 'red' : null,
+          }}
+
+          />)
           :
           null
         }
@@ -239,14 +335,34 @@ function dltPerm(){
         <div className='NoteAreaDash'>
           {
             folders && folders.map((item) => (
-              <Folder key={item.id} text={item.name} onClick={() => openFolder(item.name)}/>
+              <Folder onDrop={(e) => handleDrop(e, item.id)}
+                      onDragOver={(e) => handleDragOver(e, item.name)}
+                      onDragLeave={() => handleDragLeave(item.name)}
+                      key={item.id} 
+                      text={item.name} 
+                      style={{
+                        ...dropZoneStyle,
+                        border: hoveredFolder === item.name ? '5px solid red' : null,
+                        backgroundColor: hoveredFolder === item.name ? 'black' : null,
+                        color: hoveredFolder === item.name ? 'red' : null,
+                      }}
+                      onClick={() => openFolder(item.name)}
+                      />
           ))
         }
 
           {
              filteredNotes && filteredNotes.map((item) => (
               
-                <Note key={item.id} prio={item.prio} title={item.title} text={item.notes} onClick={() => open(item.id)}/>
+                <Note key={item.id} 
+                      prio={item.prio} 
+                      title={item.title} 
+                      text={item.notes} 
+                      onClick={() => open(item.id)}
+                      draggable
+                      onDragStart={(e) => handleDragStart(e, item.id)}
+                      onDragEnd={handleDragEnd}
+                      />
             ))
           }
         </div>

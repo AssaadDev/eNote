@@ -49,7 +49,11 @@ class noteService extends BaseService{
         return $this->dao->dltFolder($userID, $folderName);
       }
 
-      public function setReminder($data){
+      public function moveToFolder($data){
+        return $this->dao->moveToFolder($data);
+      }
+
+      public function sendEmail($data){
 
         //return $data['userID'];
 
@@ -75,7 +79,7 @@ class noteService extends BaseService{
     
                 // Email content
                 $mail->isHTML(true);
-                $mail->Subject = 'eNote Reminder for '.$data['selectedDay'];
+                $mail->Subject = $data['title'];
                 $mail->Body = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
                 <html>
                 
@@ -423,43 +427,18 @@ class noteService extends BaseService{
                                 <!-- // Begin Template Header \\ -->
                                 <table border="0" cellpadding="0" cellspacing="0" width="450" id="templateHeader" style="background-color:#FFFFFF;border-bottom:0;">
                                   <tr>
-                                    <td class="headerContent centeredWithBackground" style="border-collapse:collapse;color:#202020;font-family:Arial;font-size:34px;font-weight:bold;line-height:100%;padding:0;text-align:center;vertical-align:middle;background-color:#ee9;padding-bottom:20px;padding-top:20px;">
+                                    <td class="headerContent centeredWithBackground" style="border-collapse:collapse;color:#202020;font-family:Arial;font-size:34px;line-height:100%;padding:0;text-align:center;vertical-align:middle;background-color:#ee9;padding-bottom:20px;padding-top:20px;">
                                       <!-- // Begin Module: Standard Header Image \\ -->
-                                      <h1>Reminder</h1>
+                                      <h1 class="h1 code" style="color:#202020;display:block;font-family:Arial;font-size:24px;font-weight:bold;line-height:100%;margin-top:20px;margin-right:0;margin-bottom:20px;margin-left:0;text-align:center;">'.$data['title'].'</h1>
                                       <!-- // End Module: Standard Header Image \\ -->
+                                      <p style="font-size:16px;font-weight:Normal;">'.$data['notes'].'</p>
                                     </td>
                                   </tr>
                                 </table>
                                 <!-- // End Template Header \\ -->
                               </td>
                             </tr>
-                            <tr>
-                              <td align="center" valign="top" style="border-collapse:collapse;">
-                                <!-- // Begin Template Body \\ -->
-                                <table border="0" cellpadding="0" cellspacing="0" width="450" id="templateBody">
-                                  <tr>
-                                    <td valign="top" class="bodyContent" style="border-collapse:collapse;background-color:#FFFFFF;">
-                                      <!-- // Begin Module: Standard Content \\ -->
-                                      <table border="0" cellpadding="20" cellspacing="0" width="100%" style="padding-bottom:10px;">
-                                        <tr>
-                                          <td valign="top" style="padding-bottom:1rem;border-collapse:collapse;" class="mainContainer">
-                                            <div style="text-align:center;color:#505050;font-family:Arial;font-size:14px;line-height:150%;">
-                                              <h1 class="h1 code" style="color:#202020;display:block;font-family:Arial;font-size:24px;font-weight:bold;line-height:100%;margin-top:20px;margin-right:0;margin-bottom:20px;margin-left:0;text-align:center;">'.$data['title'].'</h1>
-                
-                                              
-                                              <p>'.$data['notes'].'</p>
-                                            </div>
-                                          </td>
-                                        </tr>
-                                        
-                                      </table>
-                                      <!-- // End Module: Standard Content \\ -->
-                                    </td>
-                                  </tr>
-                                </table>
-                                <!-- // End Template Body \\ -->
-                              </td>
-                            </tr>
+                            
                             <tr>
                               <td align="center" valign="top" style="border-collapse:collapse;">
                                 <!-- // Begin Template Footer \\ -->

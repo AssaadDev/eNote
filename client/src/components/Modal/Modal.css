@@ -10,6 +10,7 @@
     padding: 10px;
     max-width: 300px;
     display: none;
+    z-index: 1;
   }
   
   .upper-right-modal.show {

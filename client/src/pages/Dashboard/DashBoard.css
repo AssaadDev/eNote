@@ -25,3 +25,11 @@
     outline: none;
     background-color: #dff5cf;
 }
+
+
+@media (max-width: 440px){
+    a{
+      height: auto !important;
+      width: auto !important;
+    }
+  }

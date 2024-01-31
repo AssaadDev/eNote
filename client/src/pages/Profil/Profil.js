@@ -122,7 +122,7 @@ function Profil() {
                       style={styleInputeBlock}
                       styleNoFocus={styleNoFocus}
                       />
-                      <Link to='/changepw'>Change pw</Link>
+                      <Link className="setOnlyThis" to='/changepw'>Change password</Link>
 
                       {
                         userData.status !== 'inactive' ? (

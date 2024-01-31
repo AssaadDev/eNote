@@ -99,13 +99,18 @@ Flight::route('GET /Notes', function(){
 
 
   
-  Flight::route('POST /setReminder', function(){
-    Flight::json(Flight::noteSrv()->setReminder(Flight::request()->data->getData()));
+  Flight::route('POST /sendEmail', function(){
+    Flight::json(Flight::noteSrv()->sendEmail(Flight::request()->data->getData()));
     #Flight::json(Flight::request()->data->getData());
   });
 
   Flight::route('POST /createFolder', function(){
     Flight::json(Flight::noteSrv()->createFolder(Flight::request()->data->getData()));
+    #Flight::json(Flight::request()->data->getData());
+  });
+
+  Flight::route('POST /moveToFolder', function(){
+    Flight::json(Flight::noteSrv()->moveToFolder(Flight::request()->data->getData()));
     #Flight::json(Flight::request()->data->getData());
   });
 

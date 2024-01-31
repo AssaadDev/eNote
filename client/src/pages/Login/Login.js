@@ -49,7 +49,7 @@ const sendDataToBackend = (props) => {
         if((oldTimestamp-currentTimestamp) <= 0){
           showModal('You need to verify your account to continue using eNotes!');
           localStorage.setItem('status', 'STOP');
-          localStorage.setItem('folder', null);
+          
           navigate('/verify');
           return;
         }else{
